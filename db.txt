@@ -1,0 +1,24 @@
+DROP DATABASE IF EXISTS bd_tienda;
+CREATE DATABASE bd_tienda CHARSET utf8mb4;
+USE bd_tienda;
+
+CREATE TABLE categorias (
+    id_categoria INT(11) NOT NULL AUTO_INCREMENT,
+    nombre_categoria VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id_categoria)
+);
+
+CREATE TABLE productos (
+    id_producto INT(11) NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    inventario INT(11) NOT NULL,
+    id_categoria INT(11),
+    PRIMARY KEY (id_producto),
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
+);
+
+INSERT INTO categorias(nombre_categoria) VALUES('Electrónica');
+INSERT INTO productos(nombre, descripcion, precio, inventario, id_categoria) 
+VALUES('Laptop', 'Laptop HP i7', 1200.00, 10, 1);
