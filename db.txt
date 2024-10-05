@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS bd_tienda;
-CREATE DATABASE bd_tienda CHARSET utf8mb4;
-USE bd_tienda;
+DROP DATABASE IF EXISTS bd_api_productos;
+CREATE DATABASE bd_api_productos CHARSET utf8mb4;
+USE bd_api_productos;
 
 CREATE TABLE categorias (
     id_categoria INT(11) NOT NULL AUTO_INCREMENT,
