@@ -19,6 +19,6 @@ CREATE TABLE productos (
     FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
 );
 
-INSERT INTO categorias(nombre_categoria) VALUES('Electrónica');
+INSERT INTO categorias(nombre_categoria) VALUES('Electronica');
 INSERT INTO productos(nombre, descripcion, precio, inventario, id_categoria) 
 VALUES('Laptop', 'Laptop HP i7', 1200.00, 10, 1);
