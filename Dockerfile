@@ -4,9 +4,10 @@ WORKDIR /programas/api-productos
 # Actualizar pip
 RUN pip3 install --upgrade pip
 
-# Copiar el archivo de requisitos e instalar dependencias
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+# Instalar dependencias manualmente para identificar el problema
+RUN pip3 install "fastapi[standard]"
+RUN pip3 install pydantic
+RUN pip3 install mysql-connector-python
 
 # Copiar el código al contenedor
 COPY . .
