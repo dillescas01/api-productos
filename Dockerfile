@@ -1,10 +1,10 @@
-FROM python:3-slim
+FROM python:3.9
 WORKDIR /programas/api-productos
 
 # Actualizar pip
 RUN pip3 install --upgrade pip
 
-# Instalar dependencias manualmente para identificar el problema
+# Instalar dependencias
 RUN pip3 install "fastapi[standard]"
 RUN pip3 install pydantic
 RUN pip3 install mysql-connector-python
