@@ -73,3 +73,17 @@ def eliminar_producto(id_producto: int):
     cursor.close()
     mydb.close()
     return {"message": "Producto deleted successfully"}
+
+# Get a single producto by ID
+@app.get("/productos/{id_producto}")
+def obtener_producto(id_producto: int):
+    mydb = mysql.connector.connect(host=host_name, port=port_number, user=user_name, password=password_db, database=database_name)  
+    cursor = mydb.cursor()
+    cursor.execute("SELECT * FROM productos WHERE id_producto = %s", (id_producto,))
+    result = cursor.fetchone()
+    cursor.close()
+    mydb.close()
+    if result:
+        return {"producto": result}
+    else:
+        return {"error": "Producto no encontrado"}, 404
