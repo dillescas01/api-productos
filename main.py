@@ -4,7 +4,7 @@ import schemas
 
 app = FastAPI()
 
-host_name = "98.82.74.138" # MV BD
+host_name = "98.82.74.138"  # MV BD
 port_number = "8005"
 user_name = "root"
 password_db = "utec"
@@ -44,7 +44,6 @@ def crear_producto(item:schemas.Producto):
     mydb.close()
     return {"message": "Producto creado exitosamente"}
 
-
 # Modify a producto
 @app.put("/productos/{id_producto}")
 def actualizar_producto(id_producto:int, item:schemas.Producto):
@@ -61,9 +60,9 @@ def actualizar_producto(id_producto:int, item:schemas.Producto):
     mydb.commit()
     cursor.close()
     mydb.close()
-    return {"message": "Producto modified successfully"}
+    return {"message": "Producto modificado exitosamente"}
 
-# Delete an employee by ID
+# Delete a producto by ID
 @app.delete("/productos/{id_producto}")
 def eliminar_producto(id_producto: int):
     mydb = mysql.connector.connect(host=host_name, port=port_number, user=user_name, password=password_db, database=database_name)  
@@ -72,7 +71,7 @@ def eliminar_producto(id_producto: int):
     mydb.commit()
     cursor.close()
     mydb.close()
-    return {"message": "Producto deleted successfully"}
+    return {"message": "Producto eliminado exitosamente"}
 
 # Get a single producto by ID
 @app.get("/productos/{id_producto}")
@@ -83,7 +82,17 @@ def obtener_producto(id_producto: int):
     result = cursor.fetchone()
     cursor.close()
     mydb.close()
+    
     if result:
-        return {"producto": result}
+        # Asumiendo que los campos están en el orden: id, nombre, descripcion, precio, inventario, id_categoria
+        producto = {
+            "id": result[0],
+            "nombre": result[1],
+            "descripcion": result[2],
+            "precio": result[3],
+            "inventario": result[4],
+            "id_categoria": result[5]
+        }
+        return {"producto": producto}
     else:
         return {"error": "Producto no encontrado"}, 404
